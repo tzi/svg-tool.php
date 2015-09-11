@@ -79,6 +79,20 @@ class SVGPath
         return $this;
     }
 
+    public function center($width, $height)
+    {
+        $viewBox = $this->getViewBox();
+        $minX = $viewBox[0][0];
+        $minY = $viewBox[0][1];
+        $maxX = $viewBox[1][0];
+        $maxY = $viewBox[1][1];
+        $deltaX = ($width - ($maxX - $minX)) / 2;
+        $deltaY = ($height - ($maxY - $minY)) / 2;
+        $this->move($deltaX, $deltaY);
+
+        return $this;
+    }
+
     public function fit($width, $height, $padding = 0)
     {
         $viewBox = $this->getViewBox();
@@ -90,7 +104,7 @@ class SVGPath
         $ratioY = ($height - 2 * $padding) / ($maxY - $minY);
         $ratio = min($ratioX, $ratioY);
 
-        $this->move(-$minX, -$minY)->scale($ratio)->move($padding, $padding);
+        $this->move(-$minX, -$minY)->scale($ratio)->center($width, $height);
 
         return $this;
     }
