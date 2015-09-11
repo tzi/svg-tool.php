@@ -60,7 +60,7 @@ class SVGPath
         foreach ($this->pathDataList as $pathData) {
             foreach ($pathData->coordinatesList as $index => $coordinate) {
                 $pathData->coordinatesList[$index][0] += $deltaX;
-                $pathData->coordinatesList[$index][0] += $deltaY;
+                $pathData->coordinatesList[$index][1] += $deltaY;
             }
         }
 
@@ -86,8 +86,8 @@ class SVGPath
         $minY = $viewBox[0][1];
         $maxX = $viewBox[1][0];
         $maxY = $viewBox[1][1];
-        $deltaX = ($width - ($maxX - $minX)) / 2;
-        $deltaY = ($height - ($maxY - $minY)) / 2;
+        $deltaX = (($width - ($maxX - $minX)) / 2) - $minX;
+        $deltaY = (($height - ($maxY - $minY)) / 2) - $minY;
         $this->move($deltaX, $deltaY);
 
         return $this;
