@@ -1,0 +1,10 @@
+{
+  "name": "tzi/svg-tool",
+  "description": "A tool to manipulate SVG",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "SVGTool\\": "src"
+    }
+  }
+}
